@@ -4,18 +4,20 @@ var outer = function(){
   var name = 'Tyler';
   return function(){
     return 'The original name was ' + name;
-  }
-}
+  };
+};
 //Above you're given a function that returns another function which has a closure over the name variable.
 //Invoke outer saving the return value into another variable called 'inner'.
 
   //Code Here
 
+var inner = outer();
+
 //Once you do that, invoke inner.
 
   //Code Here
 
-
+inner();
 
 //Next problem
 
@@ -34,7 +36,8 @@ var callFriend = function(){
 
   //Code Here
 
-
+var call =  callFriend();
+call("435-215-9248");
 
 //Next Problem
 
@@ -45,12 +48,19 @@ var callFriend = function(){
 */
 
   //Code Here
+
+  var makeCounter = function() {
+    var num = 0;
+    return function() {
+      return num += 1;
+    };
+  };
+
   var count = makeCounter();
   count() // 1
   count() // 2
   count() // 3
   count() // 4
-
 
 
 //Next Problem
@@ -64,6 +74,44 @@ var callFriend = function(){
   After the function has been called N number of times, console.log('STAHHP');
 */
 
+function sayHi () {
+  console.log("hi");
+}
 
+var wut = function (func1) {
+  return function (N) {
+    for (var i=0; i<N; i++) {
+      func1();
+    }
+    console.log("STAHHP");
+  };
+};
 
+var leggo = wut(sayHi);
+leggo(4);
 
+//------------------------------------
+
+function sayHi () {
+  console.log("hi");
+}
+
+var wut = function(cb, N) {
+  var counter = 0;
+  return function() {
+    if (counter < N) {
+      cb();
+      counter ++;
+    } else {
+      console.log("STAHHP");
+    }
+  };
+};
+
+var leggo = wut(sayHi, 5);
+leggo();
+leggo();
+leggo();
+leggo();
+leggo();
+leggo();
